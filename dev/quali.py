@@ -107,6 +107,7 @@ def right():
     
 def forward():
     tmc.runToPositionSteps(-6000, MovementAbsRel.relative)
+    
 def backward():
     tmc.runToPositionSteps(6000, MovementAbsRel.relative)
     
