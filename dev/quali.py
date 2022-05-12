@@ -11,6 +11,9 @@ rightecho = 10
 fronttrig = 6
 frontecho = 13
 servo = 17
+leftir = 18
+rightir = 19
+button = 27
 
 # set up GPIO pins
 GPIO.setup(lefttrig,GPIO.OUT)
@@ -20,6 +23,9 @@ GPIO.setup(rightecho,GPIO.IN)
 GPIO.setup(fronttrig,GPIO.OUT)
 GPIO.setup(frontecho,GPIO.IN)
 GPIO.setup(servo,GPIO.IN)
+GPIO.setup(leftir,GPIO.IN)
+GPIO.setup(rightir,GPIO.IN)
+GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 # initiate the TMC_2209 class
 # use your pins for pin_step, pin_dir, pin_en here
@@ -86,9 +92,15 @@ def frontus():
 
 def left():
     pwm.ChangeDutyCycle(5.5) # left full position
+    
+def softleft():
+    pwm.ChangeDutyCycle(6.5)
 
 def center():
     pwm.ChangeDutyCycle(7.5) # neutral position
+    
+def softright():
+    pwm.ChangeDutyCycle(8.5)
     
 def right():
     pwm.ChangeDutyCycle(9.5) # right full position
@@ -99,17 +111,23 @@ def backward():
     tmc.runToPositionSteps(6000, MovementAbsRel.relative)
     
 # Main Code
-while True:
-    if frontus() >= 40
-        while frontus() >= 40:
-             forward()
-    else:
-        if rightus() >= leftus():
-            right()
-            forward()
-        elif leftus() >= rightus():
-            left()
-            forward()
+if GPIO.input(27) == GPIO.HIGH:
+    while True:
+        if frontus() >= 40
+            while frontus() >= 40:
+                if GPIO.input(18) == GPIO.HIGH and GPIO.input(19) == GPIO.HIGH:
+                    forward()
+                elif GPIO.input(19) == GPIO.LOW:
+                    softleft()
+                elif GPIO.input(18) == GPIO.LOW:
+                    softright()
+        else:
+            if rightus() >= leftus():
+                right()
+                forward()
+            elif leftus() >= rightus():
+                left()
+                forward()
 
 tmc.setMotorEnabled(False)
 del tmc
