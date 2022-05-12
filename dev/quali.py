@@ -100,8 +100,9 @@ def backward():
     
 # Main Code
 while True:
-    if frontus() >= 20:
-        forward()
+    if frontus() >= 40
+        while frontus() >= 40:
+             forward()
     else:
         if rightus() >= leftus():
             right()
