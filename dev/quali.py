@@ -128,6 +128,10 @@ if GPIO.input(27) == GPIO.HIGH:
             elif leftus() >= rightus():
                 left()
                 forward()
+                
+#
+# if there is a problem with ir use ultrasonic
+#              
 
 tmc.setMotorEnabled(False)
 del tmc
