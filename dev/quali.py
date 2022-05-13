@@ -120,15 +120,21 @@ if GPIO.input(27) == GPIO.HIGH:
                     forward()
                 elif GPIO.input(19) == GPIO.LOW:
                     softleft()
+                    forward()
+                    center()
                 elif GPIO.input(18) == GPIO.LOW:
                     softright()
+                    forward()
+                    center()
         else:
             if rightus() >= leftus():
                 right()
                 forward()
+                center()
             elif leftus() >= rightus():
                 left()
                 forward()
+                center()
                 
 #
 # if there is a problem with ir use ultrasonic
