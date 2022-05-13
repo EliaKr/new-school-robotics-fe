@@ -114,7 +114,7 @@ def backward():
 # Main Code
 if GPIO.input(27) == GPIO.HIGH:
     while True:
-        if frontus() >= 40
+        if frontus() >= 40:
             while frontus() >= 40:
                 if GPIO.input(18) == GPIO.HIGH and GPIO.input(19) == GPIO.HIGH:
                     forward()
