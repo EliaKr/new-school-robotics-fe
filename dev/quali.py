@@ -111,6 +111,12 @@ def forward():
 def backward():
     tmc.runToPositionSteps(6000, MovementAbsRel.relative)
     
+def half_back():
+    tmc.runToPositionSteps(3000, MovementAbsRel.relative)
+    
+def half_forward():
+    tmc.runToPositionSteps(-3000, MovementAbsRel.relative)
+    
 # Main Code
 if GPIO.input(27) == GPIO.HIGH:
     while True:
@@ -129,11 +135,11 @@ if GPIO.input(27) == GPIO.HIGH:
         else:
             if rightus() >= leftus():
                 right()
-                forward()
+                half_forward()
                 center()
             elif leftus() >= rightus():
                 left()
-                forward()
+                half_forward()
                 center()
                 
 #
