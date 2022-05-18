@@ -118,29 +118,30 @@ def half_forward():
     tmc.runToPositionSteps(-3000, MovementAbsRel.relative)
     
 # Main Code
-if GPIO.input(27) == GPIO.HIGH:
-    while True:
-        if frontus() >= 40:
-            while frontus() >= 40:
-                if GPIO.input(18) == GPIO.HIGH and GPIO.input(19) == GPIO.HIGH:
+While True:
+    if GPIO.input(27) == GPIO.HIGH:
+        while True:
+            if frontus() >= 40:
+                while frontus() >= 40:
+                    if GPIO.input(18) == GPIO.HIGH and GPIO.input(19) == GPIO.HIGH:
+                        forward()
+                    elif GPIO.input(19) == GPIO.LOW:
+                        softleft()
+                        half_forward()
+                        center()
+                    elif GPIO.input(18) == GPIO.LOW:
+                        softright()
+                        half_forward()
+                        center()
+            else:
+                if rightus() >= leftus():
+                    right()
                     forward()
-                elif GPIO.input(19) == GPIO.LOW:
-                    softleft()
-                    half_forward()
                     center()
-                elif GPIO.input(18) == GPIO.LOW:
-                    softright()
-                    half_forward()
+                elif leftus() >= rightus():
+                    left()
+                    forward()
                     center()
-        else:
-            if rightus() >= leftus():
-                right()
-                forward()
-                center()
-            elif leftus() >= rightus():
-                left()
-                forward()
-                center()
                 
 #
 # if there is a problem with ir use ultrasonic
