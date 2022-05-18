@@ -22,7 +22,7 @@ GPIO.setup(righttrig,GPIO.OUT)
 GPIO.setup(rightecho,GPIO.IN)
 GPIO.setup(fronttrig,GPIO.OUT)
 GPIO.setup(frontecho,GPIO.IN)
-GPIO.setup(servo,GPIO.IN)
+GPIO.setup(servo,GPIO.OUT)
 GPIO.setup(leftir,GPIO.IN)
 GPIO.setup(rightir,GPIO.IN)
 GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -52,9 +52,9 @@ pwm.start(0)
 
 # Define Main Functions
 def rightus():
-    GPIO.output(rightrig, True)
+    GPIO.output(righttrig, True)
     time.sleep(0.00001)
-    GPIO.output(rightrig, False)
+    GPIO.output(righttrig, False)
     while GPIO.input(rightecho)==0:
         pulse_start = time.time()
     while GPIO.input(rightecho)==1:
@@ -122,26 +122,26 @@ While True:
     if GPIO.input(27) == GPIO.HIGH:
         while True:
             if frontus() >= 40:
-                while frontus() >= 40:
-                    if GPIO.input(18) == GPIO.HIGH and GPIO.input(19) == GPIO.HIGH:
+                #while frontus() >= 40:
+                   # if GPIO.input(18) == GPIO.HIGH and GPIO.input(19) == GPIO.HIGH:
                         forward()
-                    elif GPIO.input(19) == GPIO.LOW:
-                        softleft()
-                        half_forward()
-                        center()
-                    elif GPIO.input(18) == GPIO.LOW:
-                        softright()
-                        half_forward()
-                        center()
-            else:
-                if rightus() >= leftus():
+                    #elif GPIO.input(19) == GPIO.LOW:
+                        #softleft()
+                        #half_forward()
+                        #center()
+                    #elif GPIO.input(18) == GPIO.LOW:
+                        #softright()
+                        #half_forward()
+                        #center()
+            #else:
+                #if rightus() >= leftus():
                     right()
                     forward()
                     center()
-                elif leftus() >= rightus():
-                    left()
-                    forward()
-                    center()
+                #elif leftus() >= rightus():
+                    #left()
+                    #forward()
+                    #center()
                 
 #
 # if there is a problem with ir use ultrasonic
