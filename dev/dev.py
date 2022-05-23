@@ -131,14 +131,17 @@ while True:
             else:
                 distleft = leftus()
                 distright = rightus()
-                if distright <= 30:
-                    left()
-                    forward()
-                    center()
-                elif distleft <= 30:
+                
+                if distright > distleft:
                     right()
                     forward()
                     center()
+                elif distleft > distright:
+                    left()
+                    forward()
+                    center()
+                else:
+                    half_forward()
 
 #
 # if there is a problem with ir use ultrasonic
