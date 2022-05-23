@@ -68,9 +68,9 @@ def leftus():
     GPIO.output(lefttrig, True)
     time.sleep(0.00001)
     GPIO.output(lefttrig, False)
-    while GPIO.input(rightecho)==0:
+    while GPIO.input(leftecho)==0:
         pulse_start = time.time()
-    while GPIO.input(rightecho)==1:
+    while GPIO.input(leftecho)==1:
         pulse_end = time.time()
     pulse_duration = pulse_end - pulse_start
     distance = pulse_duration * 17150
@@ -129,13 +129,13 @@ while True:
                 forward()
                 center()
             else:
-                left = leftus()
-                right = rightus()
-                if right <= 30:
+                distleft = leftus()
+                distright = rightus()
+                if distright <= 30:
                     left()
                     forward()
                     center()
-                elif left <= 30:
+                elif distleft <= 30:
                     right()
                     forward()
                     center()
