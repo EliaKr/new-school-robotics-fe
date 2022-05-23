@@ -124,10 +124,6 @@ while True:
             front = frontus()
             if front <= 350 and front >= 81:
                 forward()
-            elif front <= 81:
-                right()
-                forward()
-                center()
             else:
                 distleft = leftus()
                 distright = rightus()
