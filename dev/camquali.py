@@ -2,6 +2,7 @@ from TMC_2209.TMC_2209_StepperDriver import *
 import time
 import RPi.GPIO as GPIO
 import cv2
+import numpy
 GPIO.setmode(GPIO.BCM)
 
 # define GPIO pins
