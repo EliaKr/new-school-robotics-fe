@@ -125,46 +125,46 @@ def half_forward():
 # Main Code
 while True:
     if GPIO.input(27) == GPIO.HIGH:
-    	while True:
-    		front = frontus()
-    		if front <= 350 and front >= 81:
+        while True:
+            front = frontus()
+            if front <= 350 and front >= 81:
                 forward()
             elif front < 81:
-            	right()
-            	forward()
-            	center()
+                right()
+                forward()
+                center()
             else:
-            	img = cam.read()
-            	#crop left wall
-				#cropped = img[start_row:end_row, start_col:end_col]
-            	left_wall = img[0:1944, 0:1000]
-            	allpixleft = np.sum(left_wall <= 255)
-				blackpixleft = np.sum(left_wall < 50)
-				percblackleft = (blackpixleft / allpixleft) * 100
-				print('Percentage of black pixels at the left side:', percblackleft, "%")
-				#crop right wall
-				right_wall = img[0:1944, 1592:2592]
-				allpixright = np.sum(right_wall <= 255)
-				blackpixright = np.sum(right_wall < 50)
-				percblackright = (blackpixright / allpixright) * 100
-				print('Percentage of black pixels at the right side:', percblackright, "%")
-				
-				if percblackleft > 60:
-					right()
-					forward()
-					center()
-				elif percblackright > 60:
-					left()
-					forward()
-					center()
-				elif percblackleft < percblackright:
-					soft_left()
-					half_forward()
-					center()
-				elif percblackleft > percblackright:
-					soft_right()
-					half_forward()
-					center()
+                img = cam.read()
+                #crop left wall
+                #cropped = img[start_row:end_row, start_col:end_col]
+                left_wall = img[0:1944, 0:1000]
+                allpixleft = np.sum(left_wall <= 255)
+                blackpixleft = np.sum(left_wall < 50)
+                percblackleft = (blackpixleft / allpixleft) * 100
+                print('Percentage of black pixels at the left side:', percblackleft, "%")
+                #crop right wall
+                right_wall = img[0:1944, 1592:2592]
+                allpixright = np.sum(right_wall <= 255)
+                blackpixright = np.sum(right_wall < 50)
+                percblackright = (blackpixright / allpixright) * 100
+                print('Percentage of black pixels at the right side:', percblackright, "%")
+                
+                if percblackleft > 60:
+                    right()
+                    forward()
+                    center()
+                elif percblackright > 60:
+                    left()
+                    forward()
+                    center()
+                elif percblackleft < percblackright:
+                    soft_left()
+                    half_forward()
+                    center()
+                elif percblackleft > percblackright:
+                    soft_right()
+                    half_forward()
+                    center()
 
 #
 # if there is a problem with ir use ultrasonic
