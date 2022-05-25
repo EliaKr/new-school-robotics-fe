@@ -135,7 +135,7 @@ while True:
                 forward()
                 center()
             else:
-                img = cam.read()
+                success, img = cam.read()
                 #crop left wall
                 #cropped = img[start_row:end_row, start_col:end_col]
                 right_wall = img[0:1944, 0:1000]
@@ -149,11 +149,11 @@ while True:
                 percblackright = (blackpixright / allpixright) * 100
                 print('Percentage of black pixels at the right side:', percblackright, "%")
                 
-                if percblackleft > 60:
+                if percblackleft > 15:
                     right()
                     forward()
                     center()
-                elif percblackright > 60:
+                elif percblackright > 15:
                     left()
                     forward()
                     center()
