@@ -30,7 +30,7 @@ GPIO.setup(rightir,GPIO.IN)
 GPIO.setup(27, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 # OpenCV setup
-camera = cv2.VideoCapture(0)
+cam = cv2.VideoCapture(0)
 
 # initiate the TMC_2209 class
 # use your pins for pin_step, pin_dir, pin_en here
@@ -138,13 +138,12 @@ while True:
                 img = cam.read()
                 #crop left wall
                 #cropped = img[start_row:end_row, start_col:end_col]
-                left_wall = img[0:1944, 0:1000]
+                right_wall = img[0:1944, 0:1000]
+                left_wall = img[0:1944, 1592:2592]
                 allpixleft = np.sum(left_wall <= 255)
                 blackpixleft = np.sum(left_wall < 50)
                 percblackleft = (blackpixleft / allpixleft) * 100
                 print('Percentage of black pixels at the left side:', percblackleft, "%")
-                #crop right wall
-                right_wall = img[0:1944, 1592:2592]
                 allpixright = np.sum(right_wall <= 255)
                 blackpixright = np.sum(right_wall < 50)
                 percblackright = (blackpixright / allpixright) * 100
