@@ -92,12 +92,12 @@ In total 7 sensors of 4 different types are used to give the robot information a
 
 #### Useful Commands
 - To close the connection run the `exit` command,
-- If you want to shut down the Raspberry Pi the command `sudo shutdown 0`.
+- If you want to shut down the Raspberry Pi use the command `sudo shutdown 0`.
 - To reboot immediately another useful command is `sudo reboot now`.
 - To stop the execution of the code it is sufficient to use the keybind `Ctrl+C`
 
 #### Notes
-- Details denoted with xxx need to be filled in by the user.
+- Details denoted with `xxx` need to be filled in by the user.
 
 ## Code <a name="code"></a>
 
