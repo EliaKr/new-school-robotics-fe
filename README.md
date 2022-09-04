@@ -12,7 +12,8 @@ This repository contains all information and code necessary to be able to reprod
 3. [Uploading Code](#upload)
 4. [Code](#code)
 5. [Bug Fixing](#bugs)
-6. [Glossary](#glossary)
+6. [Useful References](#references)
+7. [Glossary](#glossary)
 
 ## Introduction <a name="introduction"></a>
 The Future Engineers challenge requires us to build a robot that can complete two tasks. The first task (called the qualifying task) requires the vehicle to make three laps of a square track autonomously, avoiding hitting any walls, as fast as possible and within a period of three minutes. The second task (called the final task) requires the vehicle to make another three laps in the same manner, while also avoiding green and red obstacles in its route and passing them from the correct side, depending on their color.
@@ -101,7 +102,13 @@ In total 7 sensors of 4 different types are used to give the robot information a
 
 ## Code <a name="code"></a>
 
+
 ## Bug Fixing <a name="bugs"></a>
+- **The motor doesn't operate normally, it runs in a random direction every time:** Make sure that the login shell over serial is disabled, then reboot.
+
+## Useful References <a name="references"></a>
+1. [TMC_2209 Raspberry Pi Library GitHub](https://github.com/Chr157i4n/TMC2209_Raspberry_Pi)
+2. [Wiring Schematic](https://github.com/EliaKr/new-school-robotics-fe/blob/main/schemes/schematic.pdf)
 
 ## Glossary <a name="glossary"></a>
 - FE: The Future Engineers category of the World Robotics Olympiad
