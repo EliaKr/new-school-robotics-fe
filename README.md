@@ -135,6 +135,7 @@ In total 7 sensors of 4 different types are used to give the robot information a
 1. [TMC_2209 Raspberry Pi Library GitHub](https://github.com/Chr157i4n/TMC2209_Raspberry_Pi)
 2. [Wiring Schematic](https://github.com/EliaKr/new-school-robotics-fe/blob/main/schemes/schematic.pdf)
 3. [TMC2209 Datasheet](https://www.trinamic.com/fileadmin/assets/Products/ICs_Documents/TMC2209_Datasheet_V103.pdf)
+4. [BigTreeTech TMC2209 Github](https://github.com/bigtreetech/BIGTREETECH-TMC2209-V1.2)
 
 ## Glossary <a name="glossary"></a>
 - FE: The Future Engineers category of the World Robotics Olympiad
