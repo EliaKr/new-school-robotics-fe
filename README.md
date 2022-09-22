@@ -130,6 +130,7 @@ In total 7 sensors of 4 different types are used to give the robot information a
 
 ## Bug Fixing <a name="bugs"></a>
 - **The motor doesn't operate normally, it runs in a random direction every time:** Make sure that the login shell over serial is disabled, then reboot.
+- **The ultrasonic sensors aren't calculating the distance to the walls:** Remove the function containing the sensor code and use its code directly in the main loop.
 
 ## Useful References <a name="references"></a>
 1. [TMC_2209 Raspberry Pi Library GitHub](https://github.com/Chr157i4n/TMC2209_Raspberry_Pi)
