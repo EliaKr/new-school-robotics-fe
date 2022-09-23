@@ -126,7 +126,32 @@ In total 7 sensors of 4 different types are used to give the robot information a
 - Details denoted with `xxx` need to be filled in by the user.
 
 ## Code <a name="code"></a>
+The code file that runs on the robot can be found at `src/xfinal.py`. To run it 6 libraries are required. These libraries are contained in the `/src/libraries/` folder and consist of time, numpy, OpenCV, dlib, TMC_2209 and RPi.GPIO. The `xfinal.py` file contains all the code needed to complete all the tasks required by the Future Engineers competition regulations. In this section we are going to explain in detail every section of the code and how it all works to accomplish the goal required.
 
+### Initial Setup <a name="codesetup"></a>
+Lines 1-69 of the code contain all the code required to initialize the robot's systems and prepare the GPIO pins for the next code sections. In more detail:
+- Lines 1-5 `import` the necessary libraries for the code to work.
+- Line 6 `GPIO.setmode(GPIO.BCM)` declares the GPIO pin numbering system used in the program.
+- Lines 9-18 declare integrers that contain the GPIO pin numbers for all devices that use GPIO. This is done for easier and more efficient coding in the following sections.
+- Lines 21-30 `setup` the GPIO pins as inputs and outputs, while also enable the internal pull down resistor of pin 27, the pin used for the button.
+- Lines 34-47 `set` the parameters used for stepper motor operations, like the microstepping resolution, max current, acceleration and speed.
+- Line 49 enables the motor with the command `tmc.setMotorEnabled(True)`
+- Lines 52-53 enables the PWM output of pin 17, where the servo is connected, thus enabling the servo.
+- Lines 55-69 contain the parameters for the OpenCV `masks` used for isolating the red and green colors later in the code. Isolating the colors allows us to measure their prevalence in the image and adjust the robot's movement accordingly.
+
+### Functions <a name="functions"></a>
+The code is written in such a way where most code is contained in pre-defined functions, which are called in the main loop. These functions enable control of the robot and use of sensor data. They are defined in lines 72-169.
+- Lines 72-109 contain the functions for distance measurement using the ultrasonic sensors placed in the front, left and right sides of the robot. These sensors work on the principle of measuring the time between the transmission of an ultrasonic pulse and the receipt of its echo in the sensor. The functions measure the amount of time taken and perform all the necessary calculations to convert it to a centimeter `distance` output.
+- Lines 111-123 contain the functions for the operation of the steering servo motor. Steering the robot is accomplished by changing the duty cycle of the `PWM` output of the servo pin, thus instantly changing the direction of the steering servo motor.
+- Lines 126-139 define the functions used for the robot's linear movement. The back-axle stepper motor is controlled with the `tmc.runToPositionSteps` command, which allows us to precisely define the steps and consequently the angle the motor will travel in a single movement. This allows us to control the exact distance the robot will travel during any movement.
+- Lines 141-169 contain the functions used for detecting the presence of the red and green obstacles in front of the robot. This is accomplished by use of a mask for each color and calculation of the presence of each color in the image, by calculating the number of pixels covered by the mask. These functions return a `True` or `False` boolean value, which is used in the main loop.
+
+### Main Code <a name="maincode"></a>
+The main code section, in lines 172-212, contains a loop, which works to check the values of the robot's sensor and camera inputs and manipulate the robot's movement in such a way to accomplish the WRO Future Engineers tasks. This loop repeats until the robot has completed 3 revolutions. Detection of the revolutions is done by use of a counter that raises by one in value when the robot makes a turn at a corner.
+
+While this counter indicated that less than 3 revolutions have been completed the robot takes constant measurements of the distance measured by each of the 3 ultrasonic sensors and when there is free space in front of it it keeps going `forward()`. When a wall is detected the robot completes a turn to the direction where it detects is should go. This detection is done by measuring the distance on each side and turning to the one with the most space. This ensures that the robot can complete both the qualifying and final rounds, no matter the direction in which it was initially placed. 
+
+When completing the movement it also checks for the presence of obstacles in front of it and moves accordingly. The detection of obstacles works by checking the output of the OpenCV functions described in the previous sections. There is also wall detection by measuring the distance to the walls. If the distance is smaller than the threshold the robot turns away from the wall automatically. 
 
 ## Bug Fixing <a name="bugs"></a>
 - **The motor doesn't operate normally, it runs in a random direction every time:** Make sure that the login shell over serial is disabled, then reboot.
