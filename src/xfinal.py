@@ -1,6 +1,8 @@
 from TMC_2209.TMC_2209_StepperDriver import *
 import time
 import RPi.GPIO as GPIO
+import cv2
+import numpy
 GPIO.setmode(GPIO.BCM)
 
 # define GPIO pins
@@ -146,7 +148,7 @@ def checkred():
     output_img[np.where(maskred==0)] = 0
     allpix = np.sum(output_img <= 255)
     blackpix = np.sum(output_img < 35)
-    if blackpix < (allpix / 10):
+    if blackpix < (allpix / 3):
         return(True)
     else:
         return(False)
@@ -161,7 +163,7 @@ def checkgreen():
     output_img[np.where(maskgreen==0)] = 0
     allpix = np.sum(output_img <= 255)
     blackpix = np.sum(output_img < 35)
-    if blackpix < (allpix / 10):
+    if blackpix < (allpix / 3):
         return(True)
     else:
         return(False)
@@ -169,7 +171,8 @@ def checkgreen():
 # Main Code
 while True:
     if GPIO.input(27) == GPIO.HIGH:
-        while True:
+        loops = 0
+        while loops < 12:
             front = frontus()
             distright = rightus()
             distleft = leftus()
@@ -200,14 +203,12 @@ while True:
                     right()
                     fullforward()
                     center()
+                    turns = turns + 1
                 else:
                     left()
                     fullforward()
                     center()
-
-#
-# if there is a problem with ir use ultrasonic
-#
+                    turns = turns + 1
 
 tmc.setMotorEnabled(False)
 del tmc
