@@ -180,11 +180,11 @@ while True:
                 forward()
                 red = checkred()
                 green = checkgreen()
-                if red = True:
+                if red == True:
                     right()
                     forward()
                     center()
-                elif green = True:
+                elif green == True:
                     left()
                     forward()
                     center()
