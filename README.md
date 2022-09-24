@@ -139,7 +139,7 @@ Lines 1-69 of the code contain all the code required to initialize the robot's s
 - Lines 21-30 `setup` the GPIO pins as inputs and outputs, while also enable the internal pull down resistor of pin 27, the pin used for the button.
 - Lines 34-47 `set` the parameters used for stepper motor operations, like the microstepping resolution, max current, acceleration and speed.
 - Line 49 enables the motor with the command `tmc.setMotorEnabled(True)`
-- Lines 52-53 enables the PWM output of pin 17, where the servo is connected, thus enabling the servo.
+- Lines 52-53 enable the PWM output of pin 17, where the servo is connected, thus enabling the servo.
 - Lines 55-69 contain the parameters for the OpenCV `masks` used for isolating the red and green colors later in the code. Isolating the colors allows us to measure their prevalence in the image and adjust the robot's movement accordingly.
 
 ### Functions <a name="functions"></a>
