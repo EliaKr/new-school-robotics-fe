@@ -172,7 +172,7 @@ def checkgreen():
 while True:
     if GPIO.input(27) == GPIO.HIGH:
         loops = 0
-        while loops < 12:
+        while turns < 12:
             front = frontus()
             distright = rightus()
             distleft = leftus()
